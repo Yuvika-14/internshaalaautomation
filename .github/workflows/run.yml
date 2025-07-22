@@ -1,0 +1,25 @@
+name: Run Internshala Automation
+
+on:
+  schedule:
+    - cron: '0 5 * * *'   # ⏰ Runs every day at 5 AM UTC
+  workflow_dispatch:       # 👆 Also allows manual trigger
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run automation script
+        run: npm start
